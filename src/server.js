@@ -1,4 +1,6 @@
 import express from 'express'
+import routes from './routes'
+import ejs from 'ejs'
 import path from 'path'
 import logger from 'morgan'
 import bodyParser from 'body-parser'
@@ -15,9 +17,7 @@ server.use(express.static(path.join(__dirname + 'src/public')))
 server.use(bodyParser.urlencoded({extended: true}))
 
 //routes
-server.use('/', (request, response) => {
-  response.render('home')
-})
+server.use('/', routes)
 
 server.listen(process.env.PORT || 8080)
 

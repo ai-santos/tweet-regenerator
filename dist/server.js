@@ -4,6 +4,14 @@ var _express = require('express');
 
 var _express2 = _interopRequireDefault(_express);
 
+var _routes = require('./routes');
+
+var _routes2 = _interopRequireDefault(_routes);
+
+var _ejs = require('ejs');
+
+var _ejs2 = _interopRequireDefault(_ejs);
+
 var _path = require('path');
 
 var _path2 = _interopRequireDefault(_path);
@@ -30,9 +38,7 @@ server.use(_express2.default.static(_path2.default.join(__dirname + 'src/public'
 server.use(_bodyParser2.default.urlencoded({ extended: true }));
 
 //routes
-server.use('/', function (request, response) {
-  response.render('home');
-});
+server.use('/', _routes2.default);
 
 server.listen(process.env.PORT || 8080);
 
