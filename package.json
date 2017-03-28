@@ -7,6 +7,7 @@
     "build": "babel --copy-files src --out-dir dist",
     "build:watch": "npm run build -- --watch",
     "start": "node dist/server.js",
+    "start:dev": "nodemon dist/server.js",
     "test": "mocha --compilers js:babel-register ./test/*.js --recursive",
     "heroku-postbuild": "npm run build"
   },
@@ -37,9 +38,11 @@
     "logger": "0.0.1",
     "morgan": "^1.8.1",
     "path": "^0.12.7",
+    "pg-promise": "^5.6.4",
     "underscore": "^1.8.3"
   },
   "dependencies": {
+    "bluebird": "^3.5.0",
     "twitter": "^1.7.0"
   }
 }
