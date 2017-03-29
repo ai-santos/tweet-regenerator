@@ -23,11 +23,13 @@ var router = _express2.default.Router();
 var twitter = new _twitter2.default(_config2.default);
 
 var params = {
-  screen_name: 'asantos3026'
+  screen_name: 'asantos3026',
+  q: 'asantos3026',
+  count: 10
 };
 
 router.get('/', function (request, response) {
-  twitter.get('users/lookup', params, function (error, tweets, twitterResponse) {
+  twitter.get('search/tweets', params, function (error, tweets, twitterResponse) {
     response.json(tweets);
     // console.log('my tweets', tweets)
   });
