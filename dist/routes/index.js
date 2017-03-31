@@ -27,6 +27,7 @@ var router = _express2.default.Router();
 var twitter = new _twitter2.default(_config2.default);
 
 var params = {
+  screen_name: 'asantos3026',
   q: 'asantos3026',
   lang: 'en',
   result_type: 'recent'
@@ -41,5 +42,30 @@ router.get('/', function (request, response) {
     response.json(tweets.statuses[0].text);
   });
 });
+
+function reTweet() {
+  var allTweets = [];
+  _database2.default.getAllTweets().then(function (results) {
+    for (var i = 0; i < results.length; i++) {
+      allTweets.push(results[i].tweetext);
+    }
+    var arrayLength = allTweets.length;
+    var index = Math.floor(Math.random() * arrayLength + 1);
+    console.log('index: ', index); //console.log here is intentionally left in!
+    var latestTweet = {
+      status: allTweets[index]
+    };
+
+    twitter.post('statuses/update', latestTweet, function (error, tweets, twitterResponse) {
+      if (error) {
+        console.log('Post failed', error);
+      } else {
+        console.log('Success');
+      }
+    });
+  });
+}
+//Retweet the latest tweet
+setInterval(reTweet, 10000);
 
 exports.default = router;
