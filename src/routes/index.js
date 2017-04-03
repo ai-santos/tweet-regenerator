@@ -20,7 +20,7 @@ router.get('/', (request, response) => {
       console.log('my tweet', tweets.statuses[i].text)
       db.addTweet(tweets.statuses[i].text)
     }
-    response.json(tweets.statuses[0].text)
+    response.redirect(tweets.statuses[0].text)
   })
 })
 
