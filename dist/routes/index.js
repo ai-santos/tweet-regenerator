@@ -36,7 +36,6 @@ var params = {
 router.get('/', function (request, response) {
   twitter.get('search/tweets', params, function (error, tweets, twitterResponse) {
     for (var i = 0; i < tweets.statuses.length; i++) {
-      // console.log('my tweet', tweets.statuses[i].text)
       _database2.default.addTweet(tweets.statuses[i].text);
     }
     response.render('home', { tweets: tweets });

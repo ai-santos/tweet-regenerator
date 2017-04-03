@@ -13,7 +13,7 @@ server.set('view engine', 'ejs')
 
 //middleware
 server.use(logger('dev'))
-server.use(express.static(path.join(__dirname + 'src/public')))
+server.use(express.static(path.join(__dirname + '/public')))
 server.use(bodyParser.urlencoded({extended: true}))
 
 //routes

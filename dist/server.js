@@ -34,7 +34,7 @@ server.set('view engine', 'ejs');
 
 //middleware
 server.use((0, _morgan2.default)('dev'));
-server.use(_express2.default.static(_path2.default.join(__dirname + 'src/public')));
+server.use(_express2.default.static(_path2.default.join(__dirname + '/public')));
 server.use(_bodyParser2.default.urlencoded({ extended: true }));
 
 //routes
