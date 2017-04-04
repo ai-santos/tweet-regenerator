@@ -33,12 +33,39 @@ var params = {
   result_type: 'recent'
 };
 
+//store tweets from database in here
+var allTweets = [];
+
+//get all of the tweets from the database
+var getTweets = function getTweets() {
+  _database2.default.getAllTweets().then(function (tweets) {
+    for (var i = 0; i < tweets.length; i++) {
+      allTweets.push(tweets[i].tweetext);
+    }
+    _database2.default.deleteDuplicates();
+  });
+};
+
+//get a random tweet
+var getOneRandomTweet = function getOneRandomTweet() {
+  getTweets();
+  var allTweetsLength = allTweets.length;
+  var index = Math.floor(Math.random() * allTweetsLength + 1);
+  return allTweets[index];
+};
+
 router.get('/', function (request, response) {
+  _database2.default.getAllTweets().then(function (tweets) {
+    response.render('home', { tweets: tweets });
+  });
+});
+
+router.get('/populateDb', function (request, response) {
   twitter.get('search/tweets', params, function (error, tweets, twitterResponse) {
     for (var i = 0; i < tweets.statuses.length; i++) {
       _database2.default.addTweet(tweets.statuses[i].text);
     }
-    response.render('home', { tweets: tweets });
+    // response.render('home', {tweets})
   });
 });
 

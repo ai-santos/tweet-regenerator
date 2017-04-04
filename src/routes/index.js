@@ -14,12 +14,41 @@ const params = {
   result_type: 'recent'
 }
 
+//store tweets from database in here
+const allTweets = []
+
+//get all of the tweets from the database
+const getTweets = () => {
+  db.getAllTweets()
+  .then( (tweets) => {
+    for(let i = 0; i < tweets.length; i++) {
+      allTweets.push(tweets[i].tweetext)
+    }
+    db.deleteDuplicates()
+  })
+}
+
+//get a random tweet
+const getOneRandomTweet = () => {
+  getTweets()
+  const allTweetsLength = allTweets.length
+  const index = Math.floor(Math.random() * allTweetsLength + 1);
+  return allTweets[index]
+}
+
 router.get('/', (request, response) => {
+  db.getAllTweets()
+  .then( (tweets) => {
+    response.render('home', {tweets})
+  })
+})
+
+router.get('/populateDb', (request, response) => {
   twitter.get('search/tweets', params, (error, tweets, twitterResponse) => {
     for(var i = 0; i < tweets.statuses.length; i++) {
       db.addTweet(tweets.statuses[i].text)
     }
-    response.render('home', {tweets})
+    // response.render('home', {tweets})
   })
 })
 

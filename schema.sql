@@ -9,4 +9,6 @@ CREATE TABLE tweets(
   tweetext VARCHAR(250)
 );
 
+CREATE UNIQUE INDEX tweetext ON tweets(tweetext);
+
 INSERT INTO tweets(tweetext) VALUES('Looking forward to some R&R this weekend.')

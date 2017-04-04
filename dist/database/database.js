@@ -18,12 +18,17 @@ var addTweet = function addTweet(tweet) {
   db.oneOrNone('INSERT INTO tweets (tweetext)\n    VALUES ($1)', [tweet]);
 };
 
-var deleteDuplicates = function deleteDuplicates(tweetId) {
-  return db.none('DELETE FROM tweets WHERE tweetid=$1', [tweetId]);
+var deleteDuplicates = function deleteDuplicates() {
+  database.any('DELETE FROM tweets WHERE ctid NOT IN\n(SELECT max(ctid) FROM tweets GROUP BY tweets.*)');
+};
+
+var dropDb = function dropDb() {
+  return db.none('DROP DATABASE IF EXISTS pajarito3026');
 };
 
 module.exports = {
   getAllTweets: getAllTweets,
   addTweet: addTweet,
-  deleteDuplicates: deleteDuplicates
+  deleteDuplicates: deleteDuplicates,
+  dropDb: dropDb
 };

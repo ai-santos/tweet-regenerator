@@ -17,10 +17,16 @@ const addTweet = (tweet) => {
   )
 }
 
-const deleteDuplicates = (tweetId) => {return db.none('DELETE FROM tweets WHERE tweetid=$1', [tweetId] )}
+const deleteDuplicates = () => {
+  database.any(`DELETE FROM tweets WHERE ctid NOT IN
+(SELECT max(ctid) FROM tweets GROUP BY tweets.*)`)
+}
+
+const dropDb = () => db.none('DROP DATABASE IF EXISTS pajarito3026')
 
 module.exports = {
   getAllTweets,
   addTweet,
-  deleteDuplicates
+  deleteDuplicates,
+  dropDb
 }

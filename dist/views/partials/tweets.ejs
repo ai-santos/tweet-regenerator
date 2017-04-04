@@ -1,14 +1,9 @@
-<ul class="media-list">
-  <li class="media">
-    <div class="media-left">
-      <a href="#">
-        <img class="media-object" src="..." alt="...">
-      </a>
-    </div>
-<% for(var i = 0; i < tweets.statuses.length; i++) { %>
-    <div class="media-body">
-      <h4 class="media-heading"><%= tweets.statuses[i] %></h4>
-    </div>
-  </li>
-<% } %>
-</ul>
+  <ul class="media-list">
+    <% tweets.forEach( function(element) { %>
+      <li class="media">
+        <div class="media-body">
+          <h4 class="media-heading"><%= element.tweetext %></h4>
+        </div>
+      </li>
+    <% }) %>
+  </ul>
