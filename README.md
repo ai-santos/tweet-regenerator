@@ -15,10 +15,10 @@ Developers/Learners will get practice working with Twitter's REST APIs on the ba
 
 ## Specifications
 
-- [ ] Use the Twitter API to access a user's last ten Twitter posts.
-- [ ] Store past tweets in a database for future access.
-- [ ] View database of past tweets in an attractive yet simple UI.
-- [ ] Re-Tweet posts in database of past tweets randomly, manually, or on a timer.
+- [X] Use the Twitter API to access a user's last ten Twitter posts.
+- [X] Store past tweets in a database for future access.
+- [X] View database of past tweets in an attractive yet simple UI.
+- [X] Re-Tweet posts in database of past tweets randomly, manually, or on a timer.
 
 ## Stretch Goals
 
